@@ -98,15 +98,15 @@ function _get_staff_login(staff_id){
         var mobile_no = staff_data.mobile_no;
         var staff_id = staff_data.staff_id;
         var post_name = staff_data.post_name;
-		var faculty_name = staff_data.faculty_name;
-		var department_name = staff_data.department_name;
+		    var faculty_name = staff_data.faculty_name;
+		    var department_name = staff_data.department_name;
         var created_time = staff_data.created_time;
         var last_login = staff_data.last_login;
         var role_name = staff_data.role_name;
         var status_name = staff_data.status_name;
         var role_id = staff_data.role_id;
         var status_id = staff_data.status_id;
-        var gender_name = staff_data.gender_name;
+        var gender_name = (staff_data.gender_name == null) ? 'Not Assigned' : staff_data.gender_name;
         var gender_id = staff_data.gender_id;
 
         var staff_profile = capitalizeWords(fullname);
@@ -250,7 +250,7 @@ function _get_staff_profile(staff_id){
 			var department_id = staff_data.department_id;
       var registrar_staff_id = staff_data.registrar_staff_id;
       var registrar_fullname = staff_data.registrar_fullname;
-      var gender_name = staff_data.gender_name;
+      var gender_name = (staff_data.gender_name == null) ? 'Not Assigned' : staff_data.gender_name;
       var gender_id = staff_data.gender_id;
   
 			var staff_profile = capitalizeWords(fullname);
