@@ -593,7 +593,7 @@
 <?php if($page=='student-profile-module'){?>
     <div class="absolute h-screen w-[90%] right-[5%] top-[55px] bg-white animated fadeInUp">
         <div class="formHeader">
-            <p class="text-white text-[13px] font-bold"><i class="bi-person-fill"></i> CUSTOMER DETAILS</p>
+            <p class="text-white text-[13px] font-bold"><i class="bi-person-fill"></i> STUDENT DETAILS</p>
             <div class="bg-white bg-opacity-80 px-[8px] py-[3px] rounded-[100%] text-[#f00] text-[18px] cursor-pointer" title="close" onclick="alert_close()"><i class="bi-x"></i></div>
         </div>
 
