@@ -79,7 +79,7 @@
 
         <div class="w-[100%] h-[40px] bg-[#ECF5F0] mt-[7px] border-solid border border-[#A0E5BD] flex justify-center">
             <div class="w-[98%] flex items-center justify-between text-[#424141]">
-                <div><i class="bi-people-fill"></i>  ACTIVE ADMINISTRATOR'S LIST</div>
+                <div><i class="bi-people-fill"></i>  INACTIVE ADMINISTRATOR'S LIST</div>
                 <button class="text-sm py-[5px] px-[10px] bg-[#0E4000]" title="Add new staff"  onClick="_get_form('staff_reg');">ADD NEW STAFF <i class="bi-person-plus"></i></button>
             </div>
         </div>
