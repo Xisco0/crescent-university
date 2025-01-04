@@ -695,6 +695,229 @@ function _add_new_course(){
     }
 }
 
+function _add_new_faculty(){
+  var faculty_name = $('#faculty_name').val();
+
+  if (faculty_name==''){
+      showError('FACULTY NAME ERROR!', 'Fill all Fields To Continue');
+  }else{
+
+      var btn_text  = $('#submit_btn').html();
+      $('#submit_btn').html('<i id="spinner" class="bi bi-arrow-repeat"></i> SUBMITTING...');
+      document.getElementById('submit_btn').disabled = true;
+
+      var formData = 'faculty_name=' + faculty_name;
+
+      axios.post(endpoint+'/admin/add-new-faculty-api?access_key='+access_key, formData, { headers: apikey })
+      .then(response => {
+          var access_check = response.data.check;
+          var success = response.data.success;
+          var message = response.data.message;
+  
+          if (access_check == 0) {
+              _logout_(); 
+          } else {
+              if (success == true) {
+                  $('#success-div').html('<div><i class="bi-check-all"></i></div>SUCCESS!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+                  $('#submit_btn').html(btn_text);
+                  document.getElementById('submit_btn').disabled=false;
+                  alert_close();
+              }else{
+                  $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+                  $('#submit_btn').html(btn_text);
+                  document.getElementById('submit_btn').disabled=false;
+              }
+          }
+      })
+      .catch(error => {
+          $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + error).fadeIn(500).delay(5000).fadeOut(100);
+          $('#submit_btn').html(btn_text);
+          document.getElementById('submit_btn').disabled = false;
+      });
+  }
+}
+
+function fetchFaculties(page, faculty_id) {
+    $('#fetch_all_faculty').html('<div class="ajax-loader"><br><img src="src/all-images/image-pix/ajax-loader.gif"/></div>').fadeIn(500);
+    var search_txt = $('#search').val();
+
+    var formData = 'faculty_id=' + faculty_id + '&search_txt=' + search_txt;
+
+    axios.post(endpoint + '/admin/fetch-all-faculty-api?access_key=' + access_key + '&page=' + page, formData, { headers: apikey })
+        .then(response => {
+            var access_check = response.data.check;
+            var success = response.data.success;
+            var message = response.data.message;
+            var fetch = response.data.data;
+            var pagination = response.data.pagination;
+
+            if (access_check == 0) {
+                _logout_();
+            } else {
+                var text = '';
+
+                if (success == true) {
+                    if (fetch.length > 0) {
+                        text = '<table class="w-[100%] border-collapse"><thead><tr><th>SN</th><th>FACULTY NAME</th><th>DATE CREATED</th><th>ACTION</th></tr></thead><tbody class="bg-white">';
+                        for (var i = 0; i < fetch.length; i++) {
+                            var faculty_id = fetch[i].faculty_id;
+                            var faculty_name = fetch[i].faculty_name.toUpperCase();
+                            var created_time = fetch[i].created_time;
+
+                            text +=
+                            '<tr>'+
+                                '<td>' + (i + 1) + '</td>'+
+                                '<td>' + faculty_name + '</td>'+
+                                '<td>' + created_time + '</td>'+
+                                '<td><i onclick="_get_form_with_id(' + "'update-faculty'" + "," + "'" + faculty_id + "'" + ')" class="bi bi-pencil-square text-[15px] text-white p-[8px] bg-primary-color cursor-pointer hover:bg-[#444444]" title="VIEW PROFILE"></i></td>'+
+                            '</tr>';
+                        }
+                        text += '</tbody></table>'+
+
+                        '<div class="my-[10px] flex justify-between">'+
+                            '<div class="text-[#3a4669]">Showing ' + pagination.current_page + ' to ' + pagination.total_pages + ' of ' + pagination.total_faculty + ' entries</div>'+
+                            '<div class="flex gap-1">'+
+                                '<button class="text-sm py-[8px] px-[15px]" ' +(pagination.prev_page ? 'onclick="fetchFaculties(' + pagination.prev_page + ', \'\')"' : 'disabled') +'>PREVIOUS</button>' +
+                                '<button class="text-sm py-[8px] px-[15px]" ' +(pagination.next_page ? 'onclick="fetchFaculties(' + pagination.next_page + ', \'\')"' : 'disabled') +'>NEXT</button>';
+                            '</div>'+
+                        '</div>';
+
+                    } 
+
+                    $('#fetch_all_faculty').html(text);
+                } else {
+                    text = '<table class="w-[100%] border-collapse"><thead><tr><th>SN</th><th>FACULTY NAME</th><th>DATE CREATED</th><th>ACTION</th></tr></thead>' +
+                    '<tbody class="bg-white">' + 
+                    '</tbody></table>' + 
+                    '<div class="bg-[#FAF3F0] text-[#3a4669] border-[#F2BDA2] border-[1px] w-[100%] mx-auto mt-[5px] flex gap-1 p-[10px] pl-[30px] text-[12px]">' +
+                    '<i class="bi bi-bell"></i><p>' + message + '</p>' +
+                    '</div>';
+             
+                    $('#fetch_all_faculty').html(text);
+             
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching faculty:', error);
+            $('#fetch_all_faculty').html('<p>There was an error fetching the faculties. Please try again later.</p>');
+        });
+}
+
+
+function fetchDepartment(page, department_id) {
+    $('#fetch_all_department').html('<div class="ajax-loader"><br><img src="src/all-images/image-pix/ajax-loader.gif"/></div>').fadeIn(500);
+    var search_txt = $('#search').val();
+
+    var formData = 'department_id=' + department_id + '&search_txt=' + search_txt;
+
+    axios.post(endpoint + '/admin/fetch-all-department-api?access_key=' + access_key + '&page=' + page, formData, { headers: apikey })
+        .then(response => {
+            var access_check = response.data.check;
+            var success = response.data.success;
+            var message = response.data.message;
+            var fetch = response.data.data;
+            var pagination = response.data.pagination;
+
+            if (access_check == 0) {
+                _logout_();
+            } else {
+                var text = '';
+
+                if (success == true) {
+                    if (fetch.length > 0) {
+                        text = '<table class="w-[100%] border-collapse"><thead><tr><th>SN</th><th>DEPARTMENT NAME</th><th>FACULTY NAME</th><th>DATE CREATED</th><th>ACTION</th></tr></thead><tbody class="bg-white">';
+                        for (var i = 0; i < fetch.length; i++) {
+                            var department_id = fetch[i].department_id;
+                            var department_name = fetch[i].department_name;
+                            var faculty_name = fetch[i].faculty_name.toUpperCase();
+                            var created_time = fetch[i].created_time;
+
+                            text +=
+                            '<tr>'+
+                                '<td>' + (i + 1) + '</td>'+
+                                '<td>' + department_name + '</td>'+
+                                '<td>' + faculty_name + '</td>'+
+                                '<td>' + created_time + '</td>'+
+                                '<td><i onclick="_get_form_with_id(' + "'update-department'" + "," + "'" + department_id + "'" + ')" class="bi bi-pencil-square text-[15px] text-white p-[8px] bg-primary-color cursor-pointer hover:bg-[#444444]" title="VIEW PROFILE"></i></td>'+
+                            '</tr>';
+                        }
+                        text += '</tbody></table>'+
+
+                        '<div class="my-[10px] flex justify-between">'+
+                            '<div class="text-[#3a4669]">Showing ' + pagination.current_page + ' to ' + pagination.total_pages + ' of ' + pagination.total_department + ' entries</div>'+
+                            '<div class="flex gap-1">'+
+                                '<button class="text-sm py-[8px] px-[15px]" ' +(pagination.prev_page ? 'onclick="fetchDepartment(' + pagination.prev_page + ', \'\')"' : 'disabled') +'>PREVIOUS</button>' +
+                                '<button class="text-sm py-[8px] px-[15px]" ' +(pagination.next_page ? 'onclick="fetchDepartment(' + pagination.next_page + ', \'\')"' : 'disabled') +'>NEXT</button>';
+                            '</div>'+
+                        '</div>';
+
+                    } 
+
+                    $('#fetch_all_department').html(text);
+                } else {
+                  text = '<table class="w-[100%] border-collapse"><thead><tr><th>SN</th><th>FACULTY NAME</th><th>DATE CREATED</th><th>ACTION</th></tr></thead>' +
+                  '<tbody class="bg-white">' + 
+                  '</tbody></table>' + 
+                  '<div class="bg-[#FAF3F0] text-[#3a4669] border-[#F2BDA2] border-[1px] w-[100%] mx-auto mt-[5px] flex gap-1 p-[10px] pl-[30px] text-[12px]">' +
+                  '<i class="bi bi-bell"></i><p>' + message + '</p>' +
+                  '</div>';
+                    $('#fetch_all_department').html(text);
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching department:', error);
+            $('#fetch_all_department').html('<p>There was an error fetching the department. Please try again later.</p>');
+        });
+}
+
+
+function _add_new_department(){
+  var faculty_id = $('#faculty_id').val();
+  var department_name = $('#department_name').val();
+
+  if (faculty_id==''){
+      showError('FACULTY ERROR!', 'Fill all Fields To Continue');
+  }else if (department_name==''){
+    showError('DEPARTMENT NAME ERROR!', 'Fill all Fields To Continue');
+  }else{
+
+      var btn_text  = $('#submit_btn').html();
+      $('#submit_btn').html('<i id="spinner" class="bi bi-arrow-repeat"></i> SUBMITTING...');
+      document.getElementById('submit_btn').disabled = true;
+
+      var formData = 'faculty_id=' + faculty_id + '&department_name=' + department_name;
+
+      axios.post(endpoint+'/admin/add-new-department-api?access_key='+access_key, formData, { headers: apikey })
+      .then(response => {
+          var access_check = response.data.check;
+          var success = response.data.success;
+          var message = response.data.message;
+  
+          if (access_check == 0) {
+              _logout_(); 
+          } else {
+              if (success == true) {
+                  $('#success-div').html('<div><i class="bi-check-all"></i></div>SUCCESS!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+                  $('#submit_btn').html(btn_text);
+                  document.getElementById('submit_btn').disabled=false;
+                  alert_close();
+              }else{
+                  $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+                  $('#submit_btn').html(btn_text);
+                  document.getElementById('submit_btn').disabled=false;
+              }
+          }
+      })
+      .catch(error => {
+          $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + error).fadeIn(500).delay(5000).fadeOut(100);
+          $('#submit_btn').html(btn_text);
+          document.getElementById('submit_btn').disabled = false;
+      });
+  }
+}
+
 function _get_course() {
     axios.post(endpoint + '/admin/fetch-course-api?access_key=' + access_key, null, { headers: apikey })
     .then(response => {
@@ -722,7 +945,7 @@ function _get_course() {
 function _add_new_department_course(){
     var faculty_id = $('#faculty_id').val();
     var department_id = $('#department_id').val();
-	var course_id = $('#course_id').val();
+	  var course_id = $('#course_id').val();
 
     if (faculty_id=='Select Faculty'){
         showError('FACULTY ERROR!', 'Fill all Fields To Continue');
@@ -767,10 +990,54 @@ function _add_new_department_course(){
     }
 }
 
+function fetchEachFaculty(faculty_id) {
+  var formData = 'faculty_id=' + faculty_id;
+  axios.post(endpoint + '/admin/fetch-all-faculty-api?access_key=' + access_key, formData, { headers: apikey })
+    .then(response => {
+      var access_check = response.data.check;
+      var success = response.data.success;
+      var fetch = response.data.data[0];
+
+      if (access_check == 0) {
+        _logout_();
+      } else {
+
+        if (success == true) {
+          $('#faculty_name').val(fetch.faculty_name);
+        }
+      }
+    })
+}
+
+function fetchEachDepartment(department_id) {
+  var formData = 'department_id=' + department_id;
+  axios.post(endpoint + '/admin/fetch-all-department-api?access_key=' + access_key, formData, { headers: apikey })
+    .then(response => {
+      var access_check = response.data.check;
+      var success = response.data.success;
+      var fetch = response.data.data[0];
+
+      if (access_check == 0) {
+        _logout_();
+      } else {
+
+        if (success == true) {
+          var faculty_id = fetch.faculty_id;
+          var department_id = fetch.department_id;
+          var faculty_name = fetch.faculty_name;
+          var department_name = fetch.department_name;
+          $("#faculty_id").append('<option value="' + faculty_id + '" selected="selected">' + faculty_name +"</option>");
+          $("#department_id").append('<option value="' + department_id + '" selected="selected">' + department_name +"</option>");
+        }
+      }
+    })
+}
+
+
 function _change_pass(staff_id){
     var old_pass = $('#old_pass').val();
     var new_pass = $('#new_pass').val();
-	var confirm_pass = $('#confirm_pass').val();
+	  var confirm_pass = $('#confirm_pass').val();
 
     if (old_pass==''){
         showError('OLD PASSWORD ERROR!', 'Fill all Fields To Continue');
@@ -888,6 +1155,148 @@ function _get_student_profile(student_id){
 		  }
 		}
 	});
+}
+
+function updateFaculty(faculty_id){
+  var faculty_name = $('#faculty_name').val();
+
+  if (faculty_name==''){
+      showError('FACULTY NAME ERROR!', 'Fill all Fields To Continue');
+  }else{
+
+      var btn_text  = $('#submit_btn').html();
+      $('#submit_btn').html('<i id="spinner" class="bi bi-arrow-repeat"></i> SUBMITTING...');
+      document.getElementById('submit_btn').disabled = true;
+
+      var formData = 'faculty_id=' + faculty_id + '&faculty_name=' + faculty_name;
+      axios.post(endpoint+'/admin/update-faculty-api?access_key='+access_key, formData, { headers: apikey })
+
+      .then(response => {
+          var access_check = response.data.check;
+          var success = response.data.success;
+          var message = response.data.message;
+  
+          if (access_check == 0) {
+              _logout_(); 
+          } else {
+              if (success == true) {
+                  $('#success-div').html('<div><i class="bi-check-all"></i></div>SUCCESS!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+                  $('#submit_btn').html(btn_text);
+                  document.getElementById('submit_btn').disabled=false;
+                  fetchFaculties(1, '');
+                  alert_close();
+              }else{
+                  $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+                  $('#submit_btn').html(btn_text);
+                  document.getElementById('submit_btn').disabled=false;
+              }
+          }
+      })
+      .catch(error => {
+          $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + error).fadeIn(500).delay(5000).fadeOut(100);
+          $('#submit_btn').html(btn_text);
+          document.getElementById('submit_btn').disabled = false;
+      });
+  }
+}
+
+function updateDepartment(department_id){
+  var department_id = $('#department_id').val();
+  var faculty_id = $('#faculty_id').val();
+
+  if (department_id==''){
+      showError('DEPARTMENT ID ERROR!', 'Fill all Fields To Continue');  
+  }else if (faculty_id==''){
+    showError('FACULTY ID ERROR!', 'Fill all Fields To Continue');
+  }else{
+      var btn_text  = $('#submit_btn').html();
+      $('#submit_btn').html('<i id="spinner" class="bi bi-arrow-repeat"></i> SUBMITTING...');
+      document.getElementById('submit_btn').disabled = true;
+
+      var formData = 'faculty_id=' + faculty_id + '&department_id=' + department_id;
+      axios.post(endpoint+'/admin/update-department-api?access_key='+access_key, formData, { headers: apikey })
+
+      .then(response => {
+          var access_check = response.data.check;
+          var success = response.data.success;
+          var message = response.data.message;
+  
+          if (access_check == 0) {
+              _logout_(); 
+          } else {
+              if (success == true) {
+                  $('#success-div').html('<div><i class="bi-check-all"></i></div>SUCCESS!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+                  $('#submit_btn').html(btn_text);
+                  document.getElementById('submit_btn').disabled=false;
+                  fetchDepartment(1, '');
+                  alert_close();
+              }else{
+                  $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+                  $('#submit_btn').html(btn_text);
+                  document.getElementById('submit_btn').disabled=false;
+              }
+          }
+      })
+      .catch(error => {
+          $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + error).fadeIn(500).delay(5000).fadeOut(100);
+          $('#submit_btn').html(btn_text);
+          document.getElementById('submit_btn').disabled = false;
+      });
+  }
+}
+
+function upload_pix() {
+  $(function () {
+    Upload = {
+      UpdatePreview: function (obj) {
+        if (!window.FileReader) {
+          // Handle browsers that don't support FileReader
+          console.error("FileReader is not supported.");
+        } else {
+          upload_staff_passport(staff_id);
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('#pictureBox2').prop("src", e.target.result);
+          };
+
+          reader.readAsDataURL(obj.files[0]);
+        }
+      },
+    };
+  });
+}
+
+
+function upload_staff_passport(staff_id){
+  var passport_pix_input = $('#profile_pix')[0];
+  var passport_pix_file = passport_pix_input.files[0];
+  
+  var formData = new FormData();
+  formData.append('staff_id', staff_id);
+  formData.append('profile_pix', passport_pix_file);
+  formData.append('profile_pix', profile_pix)
+
+  axios.post(endpoint+'/admin/passport-api?access_key='+access_key, formData, { headers: apikey })
+
+  .then(response => {
+    var access_check = response.data.check;
+    var success = response.data.success;
+    var message = response.data.message;
+
+    if (access_check == 0) {
+        _logout_(); 
+    } else {
+        if (success == true) {
+            $('#success-div').html('<div><i class="bi-check-all"></i></div>SUCCESS!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+        }else{
+            $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+        }
+    }
+})
+.catch(error => {
+    $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + error).fadeIn(500).delay(5000).fadeOut(100);
+});
 }
   
 

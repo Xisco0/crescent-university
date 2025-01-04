@@ -38,7 +38,7 @@
 }
 
 .count-div{
-  @apply w-[30%] h-[180px] bg-primary-color rounded-md flex-grow flex justify-between items-center;
+  @apply w-[30%] h-[200px] bg-primary-color rounded-md flex-grow flex justify-between items-center;
 }
 
 .formHeader{
@@ -50,7 +50,7 @@
 }
 
 th{
-  @apply p-[12px] text-left text-[10px] font-bold text-[#333] bg-[#E1DDDA];
+  @apply p-[12px] text-left text-[10px] font-bold text-white bg-primary-color;
 }
 
 td{

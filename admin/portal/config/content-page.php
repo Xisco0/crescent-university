@@ -51,79 +51,99 @@
 	</div>
 <?php }?>
 
-<?php if($page=='active-staff'){?>
+<?php if($page=='all-staff'){?>
    <div class="w-[100%] h-[55px] text-white bg-[#EBEBEB] rounded-md font-body">
-        <div class="w-[95%] mx-[auto]">
-            <input class="w-[100%] h-[40px] mt-[7.5px] outline-none px-[10px] text-black/50 rounded-md focus:border border-black/30" type="text" id="search" onkeyup="_all_staff(1)" />
+       <div class="w-[95%] h-[55px] m-auto flex justify-between items-center content-center gap-[5px] text-[10px] text-[#ABABAB]">
+            <select class="w-[20%] h-[45px] bg-white pl-[20px] rounded-[5px] focus:border-black border-solid border focus:border-opacity-30 flex flex-grow" id="status_id" onchange="_all_staff(this.value)">
+                <option value="">All Status</option>
+                <script>_get_status();</script>
+            </select>
+
+            <select class="w-[20%] h-[45px] bg-white pl-[20px] rounded-[5px] focus:border-black border-solid border focus:border-opacity-30 flex flex-grow" onchange="">
+                <option value="">All Departments</option>
+            </select>
+
+            <input class="w-[30%] h-[45px] bg-white pl-[20px] rounded-[5px] outline-none focus:border-black border-solid border focus:border-opacity-30 flex flex-grow" type="text" id="search" onkeyup="_all_staff('');" placeholder="Type here to search..." title="Type here to search"/>
         </div>
 
-        <div class="w-[100%] h-[40px] bg-[#ECF5F0] mt-[7px] border-solid border border-[#A0E5BD] flex justify-center">
+        <div class="w-[100%] h-[40px] bg-[#ECF5F0] border-solid border border-[#A0E5BD] flex justify-center">
             <div class="w-[98%] flex items-center justify-between text-[#424141]">
-                <div><i class="bi-people-fill"></i>  ACTIVE ADMINISTRATOR'S LIST</div>
+                <div><i class="bi-people-fill"></i>  ALL ADMINISTRATOR'S LIST</div>
                 <button class="text-sm py-[5px] px-[10px] bg-[#0E4000]" title="Add new staff"  onClick="_get_form('staff_reg');">ADD NEW STAFF <i class="bi-person-plus"></i></button>
             </div>
         </div>
 
         <div class="w-[98%] m-auto mt-[15px] flex justify-center flex-wrap gap-[15px]" id="fetch_all_staff">
-            <script>_all_staff(1);</script>
+            <script>_all_staff('');</script>
         </div>
    </div>
 <?php }?>
 
 
-<?php if($page=='inactive-staff'){?>
-    <div class="w-[100%] h-[55px] text-white bg-[#EBEBEB] rounded-md font-body">
-        <div class="w-[95%] mx-[auto]">
-            <input class="w-[100%] h-[40px] mt-[7.5px] outline-none px-[10px] text-black/50 rounded-md focus:border border-black/30" type="text" id="search" onkeyup="_all_staff(2)" />
-        </div>
-
-        <div class="w-[100%] h-[40px] bg-[#ECF5F0] mt-[7px] border-solid border border-[#A0E5BD] flex justify-center">
-            <div class="w-[98%] flex items-center justify-between text-[#424141]">
-                <div><i class="bi-people-fill"></i>  INACTIVE ADMINISTRATOR'S LIST</div>
-                <button class="text-sm py-[5px] px-[10px] bg-[#0E4000]" title="Add new staff"  onClick="_get_form('staff_reg');">ADD NEW STAFF <i class="bi-person-plus"></i></button>
-            </div>
-        </div>
-
-        <div class="w-[98%] m-auto mt-[15px] flex justify-center flex-wrap gap-[15px]" id="fetch_all_staff">
-            <script>_all_staff(2);</script>
-        </div>
-   </div>
-<?php }?>
-
-
-<?php if($page=='active-student'){?>
+<?php if($page=='all-student'){?>
    <div class="w-[100%] h-[55px] text-white bg-[#EBEBEB] rounded-md font-body">
-        <div class="w-[95%] mx-[auto]">
-            <input class="w-[100%] h-[40px] mt-[7.5px] outline-none px-[10px] text-black/50 rounded-md focus:border border-black/30" type="text" id="search"/>
+        <div class="w-[95%] h-[55px] m-auto flex justify-between items-center content-center gap-[5px] text-[10px] text-[#ABABAB]">
+            <select class="w-[20%] h-[45px] bg-white pl-[20px] rounded-[5px] focus:border-black border-solid border focus:border-opacity-30 flex flex-grow" id="status_id" onchange="_all_student(this.value);">
+                <option value="">All Status</option>
+                <script>_get_status();</script>
+            </select>
+
+            <select class="w-[20%] h-[45px] bg-white pl-[20px] rounded-[5px] focus:border-black border-solid border focus:border-opacity-30 flex flex-grow" onchange="">
+                <option value="">All Departments</option>
+            </select>
+
+             <select class="w-[20%] h-[45px] bg-white pl-[20px] rounded-[5px] focus:border-black border-solid border focus:border-opacity-30 flex flex-grow" onchange="">
+                <option value="">All Levels</option>
+            </select>
+            <input class="w-[30%] h-[45px] bg-white pl-[20px] rounded-[5px] outline-none focus:border-black border-solid border focus:border-opacity-30 flex flex-grow" type="text" id="search" onkeyup="_all_student('');" placeholder="Type here to search..." title="Type here to search"/>
         </div>
 
-        <div class="w-[100%] h-[40px] bg-[#ECF5F0] mt-[7px] border-solid border border-[#A0E5BD] flex justify-center">
+        <div class="w-[100%] h-[40px] bg-[#ECF5F0] border-solid border border-[#A0E5BD] flex justify-center">
             <div class="w-[98%] flex items-center justify-between text-[#424141]">
-                <div><i class="bi-people-fill"></i>  ACTIVE STUDENT'S LIST</div>
+                <div><i class="bi-people-fill"></i>  ALL STUDENT'S LIST</div>
             </div>
         </div>
 
         <div class="w-[98%] m-auto mt-[15px] flex justify-center flex-wrap gap-[15px]" id="fetch_all_student">
-            <script>_all_student(1);</script>
+            <script>_all_student('');</script>
         </div>
    </div>  
 <?php }?>
 
-
-<?php if($page=='inactive-student'){?>
+<?php if($page=='faculty-module'){?>
    <div class="w-[100%] h-[55px] text-white bg-[#EBEBEB] rounded-md font-body">
         <div class="w-[95%] mx-[auto]">
-            <input class="w-[100%] h-[40px] mt-[7.5px] outline-none px-[10px] text-black/50 rounded-md focus:border border-black/30" type="text" id="search"/>
+            <input class="w-[100%] h-[40px] mt-[7.5px] outline-none px-[10px] text-black/50 rounded-md focus:border border-black/30" type="text" id="search" onkeyup="fetchFaculties(1, '')"/>
         </div>
 
         <div class="w-[100%] h-[40px] bg-[#ECF5F0] mt-[7px] border-solid border border-[#A0E5BD] flex justify-center">
             <div class="w-[98%] flex items-center justify-between text-[#424141]">
-                <div><i class="bi-people-fill"></i>  INACTIVE STUDENT'S LIST</div>
+                <div><i class="bi-cash-coin"></i>  ALL FACULTY LIST</div>
+                <button class="text-sm py-[5px] px-[10px] bg-[#0E4000]" title="Add new faculty"  onClick="_get_form('add-faculty');">ADD NEW FACULTY <i class="bi-cash-coin"></i></button>
             </div>
         </div>
 
-        <div class="w-[98%] m-auto mt-[15px] flex justify-center flex-wrap gap-[15px]" id="fetch_all_student">
-            <script>_all_student(2);</script>
+        <div class="w-[98%] m-auto mt-[10px]" id="fetch_all_faculty">
+            <script>fetchFaculties(1, '');</script> 
+        </div>
+   </div>  
+<?php }?>
+
+<?php if($page=='department-module'){?>
+   <div class="w-[100%] h-[55px] text-white bg-[#EBEBEB] rounded-md font-body">
+        <div class="w-[95%] mx-[auto]">
+            <input class="w-[100%] h-[40px] mt-[7.5px] outline-none px-[10px] text-black/50 rounded-md focus:border border-black/30" type="text" id="search" onkeyup="fetchDepartment(1, '')"/>
+        </div>
+
+        <div class="w-[100%] h-[40px] bg-[#ECF5F0] mt-[7px] border-solid border border-[#A0E5BD] flex justify-center">
+            <div class="w-[98%] flex items-center justify-between text-[#424141]">
+                <div><i class="bi-cash-coin"></i>  ALL DEPARTMENT LIST</div>
+                <button class="text-sm py-[5px] px-[10px] bg-[#0E4000]" title="Add new staff"  onClick="_get_form('add-department');">ADD NEW DEPARTMENT <i class="bi-cash-coin"></i></button>
+            </div>
+        </div>
+
+        <div class="w-[98%] m-auto mt-[10px]" id="fetch_all_department">
+            <script>fetchDepartment(1, '');</script>
         </div>
    </div>  
 <?php }?>

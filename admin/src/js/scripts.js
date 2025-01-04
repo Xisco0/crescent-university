@@ -225,6 +225,7 @@ function _log_in(){
       .then(response => {
           var success = response.data.success;
           var message = response.data.message;
+          var role_id = response.data.role_id;
           var staff_id = response.data.staff_id;
           var access_key = response.data.access_key;
 
@@ -232,6 +233,7 @@ function _log_in(){
               $('#success-div').html('<div><i class="bi-check-all"></i></div>SUCCESS!' + ' ' + message + "").fadeIn(500).delay(5000).fadeOut(100);
               $('#submit_btn').html(btn_text);
               document.getElementById('submit_btn').disabled=false;
+              sessionStorage.setItem('role_id', role_id);
               sessionStorage.setItem('staff_id', staff_id);
               sessionStorage.setItem('access_key', access_key);
               window.location.href=portal_url;

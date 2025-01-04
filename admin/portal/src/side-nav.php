@@ -2,24 +2,14 @@
     <div class="mt-[70px]">
         <ul>
             <li class="side-links" onclick="_get_page('dashboard');"><i class="bi-speedometer2 text-[#3a4669] mr-[6px]"></i> Dashboard</li>
-            <li class="side-links" id="admin-page" onclick="_expand_link('staff');" title="Admin"><i class="bi-people text-[#3a4669] mr-[6px]"></i> Admin/Staff <i class="bi bi-chevron-down float-right mr-[15px]"></i>
-                <div class="w-[100%] bg-[#f4f6fa]" id="staff-li" style="display:none">   
-                    <div class="li-in" onclick="_get_page('active-staff');"> - Active Staff</div>
-                    <div class="li-in" onclick="_get_page('inactive-staff');"> - Inactive Staff</div>
-                </div>
-            </li>
+            <li class="side-links" id="admin-page" onclick="_get_page('all-staff');" title="Admin"><i class="bi-people text-[#3a4669] mr-[6px]"></i> Admin/Staff</li>
 
-            <li class="side-links" onclick="_expand_link('agents');" title="Student Page"><i class="bi-people text-[#3a4669] mr-[6px]"></i> Student Page<i class="bi bi-chevron-down float-right mr-[15px]"></i>
-                <div class="w-[100%] bg-[#f4f6fa]" id="agents-li" style="display:none">   
-                    <div class="li-in" onclick="_get_page('active-student');"> - Active Student</div>
-                    <div class="li-in" onclick="_get_page('inactive-student');"> - Inactive Student</div>
-                </div>
-            </li>
+            <li class="side-links" onclick="_get_page('all-student');" title="Student Page"><i class="bi-people text-[#3a4669] mr-[6px]"></i> Student Page</li>
 
-            <li class="side-links" onclick="_expand_link('faculty');" title="Faculty/Department Page"><i class="bi-book text-[#3a4669] mr-[6px]"></i> Faculty/Department Page<i class="bi bi-chevron-down float-right mr-[15px]"></i>
+            <li class="side-links" id="faculty-department-page" onclick="_expand_link('faculty');" title="Faculty/Department Page"><i class="bi-book text-[#3a4669] mr-[6px]"></i> Faculty/Department Page<i class="bi bi-chevron-down float-right mr-[15px]"></i>
                 <div class="w-[100%] bg-[#f4f6fa]" id="faculty-li" style="display:none">   
-                    <div class="li-in"> - View Faculty</div>
-                    <div class="li-in"> - View Department</div>
+                    <div class="li-in" onclick="_get_page('faculty-module');"> - View Faculty</div>
+                    <div class="li-in" onclick="_get_page('department-module');"> - View Department</div>
                 </div>
             </li>
 
@@ -41,6 +31,13 @@
         </ul>
     </div>
 </nav>
+
+<script>
+    if (role_id<=1){
+        $('#admin-page').hide();
+        $('#faculty-department-page').hide();
+    }
+</script>
 
 
 
