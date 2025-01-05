@@ -277,7 +277,6 @@
                 <label>
                     <div class="w-[100px] h-[100px] border-[2px] border-white float-left rounded-[7px]" >
                         <img class="w-full h-full object-cover rounded-[5px]" alt="Profile Picture" title="Profile Picture" id="staff_passport" style="width: 100px; height: 100px; object-position: top;"/>
-                        <input type="file" id="profile_pix" style="display:none" accept=".jpg, .jpeg, .png, .gif, .bmp, .tiff, .webp, .svg, .avif" onchange="Upload.UpdatePreview(this);"/>
                     </div>
                 </label>
 

@@ -1289,6 +1289,7 @@ function upload_staff_passport(staff_id){
     } else {
         if (success == true) {
             $('#success-div').html('<div><i class="bi-check-all"></i></div>SUCCESS!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
+            _get_staff_login(staff_id);
         }else{
             $('#warning-div').html('<div><i class="bi-check-all"></i></div>ERROR!' + ' ' + message).fadeIn(500).delay(5000).fadeOut(100);
         }
