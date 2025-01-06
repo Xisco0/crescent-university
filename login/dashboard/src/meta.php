@@ -14,10 +14,12 @@
 <link href="<?php echo $website_url?>/login/dashboard/src/styles/style.css" rel="stylesheet" type ="text/css" />
 <link href="<?php echo $website_url?>/public/styles/paramount.css" rel="stylesheet" type ="text/css"/>
 <link href="<?php echo $website_url?>/public/styles/icons-1.10.2/font/bootstrap-icons.css" rel="stylesheet" type ="text/css"/>
+<link href="<?php echo $website_url?>/public/styles/awesome-font/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 <link href="<?php echo $website_url?>/login/dashboard/src/output.css" rel="stylesheet">
 
 <script src="<?php echo $website_url?>/public/js/jquery-v3.6.1.min.js"></script>
 <script src="<?php echo $website_url?>/login/dashboard/js/scripts.js"></script>
+<script src="<?php echo $website_url?>/login/dashboard/js/session_validation.js"></script>
 <script src="<?php echo $website_url?>/public/js/aos.js"></script>
 <script src="<?php echo $website_url?>/public/js/superplaceholder.js"></script>
 <script src="<?php echo $website_url?>/public/js/jspdf.min.js_1.5.3/cdnjs/jspdf.min.js"></script>

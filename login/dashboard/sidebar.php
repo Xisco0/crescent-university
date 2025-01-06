@@ -1,10 +1,10 @@
-<div class="h-full w-[280px] pt-[20px] bg-[#104621]">
+<div class="h-full w-[280px] pt-[20px] bg-[#104621] custom-screen-dh:hidden">
         
     <div class="flex items-center gap-[20px] border-b-[1px] border-b-[#BEBEBE]">
-        <img src="all-images/background/friends.png" alt="image" class="overflow-hidden rounded-[50%] w-[60px] h-[60px] cursor-pointer ml-[15px]">
+        <img alt="image" class="passport overflow-hidden rounded-[50%] w-[60px] object-fill h-[60px] cursor-pointer ml-[15px]">
         <div class="text-[var(--main-color)] py-[20px] leading-[19px]">
             <span class="font-[body-font] text-[var(--schools-color)]">Welcome</span>
-            <h2 class="font-[sub-title-font] text-[13px]">BAMIRIN FRANCIS</h2>
+            <h2 class="font-[sub-title-font] text-[13px] display-fullname"></h2>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
                     <li onclick="Getpages('update-bio', 'update-bio')" id="update-bio" class="cursor-pointer active-li">Update Biodata
                     <div class="hidden" id="_update-bio"><i class="bi-person"></i> Update Biodata</div>
                     </li>
-                    <li class="mt-[10px] cursor-pointer" onclick="printBiodata()">Print Biodata</li>
+                    <li class="mt-[10px] cursor-pointer hidden" id="print-bio" onclick="printBiodata()">Print Biodata</li>
                     <li class="my-[10px] cursor-pointer" onclick="Getpages('transfer', 'transfer')" id="transfer">Transfer
                         <div class="hidden text-[17px] font-semibold" id="_transfer"><i class="bi-arrow-up-right-square-fill"></i> Transfer</div>
                     </li>

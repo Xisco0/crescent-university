@@ -7,6 +7,12 @@ $action=$_POST['action'];
 	    $page=$_POST['page'];
 		require_once ('index-page.php');
 	break;
+
+
+	case 'get-form':
+	    $page=$_POST['page'];
+		require_once ('form.php');
+	break;
 	
     }
 ?>

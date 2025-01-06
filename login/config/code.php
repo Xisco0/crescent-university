@@ -13,5 +13,15 @@ $action=$_POST['action'];
 		require_once ('index-page.php');
 	break;
 
+	case 'email_verification':
+	    $page='finish-signup';
+		require_once ('index-page.php');
+	break;
+
+	case 'email_success':
+	    $page='registration-success';
+		require_once ('index-page.php');
+	break;
+
     }
 ?>

@@ -16,7 +16,7 @@
 <script src="<?php echo $website_url?>/public/js/jquery-v3.6.1.min.js"></script>
 <script src="<?php echo $website_url?>/login/src/js/scripts.js"></script>
 <script src="<?php echo $website_url?>/login/src/js/jquery.backstretch.min.js" type="text/javascript"></script>
-<script src="<?php echo $website_url; ?>/node_modules/axios/dist/axios.min.js" type="text/javascript"></script>
+<script src="<?php echo $website_url?>/node_modules/axios/dist/axios.min.js" type="text/javascript"></script>
 <script src="<?php echo $website_url?>/public/js/aos.js"></script>
 <script src="<?php echo $website_url?>/public/js/superplaceholder.js"></script>
 

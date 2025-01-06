@@ -9,7 +9,7 @@
     $sysname=gethostname();//computer used
     /////////////////////////////////////////////////////////////////
     $website_url='http://localhost/crescent_university.com';
-    // $website_url='http://172.20.10.2/crescent_university.com';
+    // $website_url='https://207d-102-89-47-118.ngrok-free.app/crescent_university.com';
     $latest_version= date('Ymdhis');
 ?>
 
@@ -17,9 +17,11 @@
 
 <script>
 var website_url='http://localhost/crescent_university.com';
-var admin_portal_dashboard= website_url+'/login/config/code';
-var admin_portal= website_url+'/login/dashboard/config/code';
+// var website_url='https://207d-102-89-47-118.ngrok-free.app/crescent_university.com'
+var admin_portal_dashboard = website_url+'/login/config/code';
+var admin_portal = website_url+'/login/dashboard/config/code';
 var dashboards= website_url +'/login/dashboard';
 var apiKey='43411331-74e2-46fd-8cb5-9dc4742dd15c';
-var endPoint = 'http://localhost/crescent_university-api/api/user';
+// var endPoint='https://207d-102-89-47-118.ngrok-free.app/crescent_university-api/api/user';
+var endPoint='http://localhost/crescent_university-api/api/user';
 </script> 

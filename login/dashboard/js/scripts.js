@@ -1,4 +1,9 @@
 
+function _logOut() {
+	sessionStorage.clear();
+	window.parent.location.href = website_url + "/login";
+}
+
 
 document.addEventListener("DOMContentLoaded", function() {
 setTimeout(function() {
@@ -105,26 +110,6 @@ function _getActiveLink(divid) {
 	$("#page_title").html($("#_" + divid).html());
 }
 
-
-
-// function Getpages(page, divid) {
-//   _getActiveLink(divid); 
-//   $('#page-content').html('<div class="ajax-loader"><img src="all-images/images/ajax-loader.gif"/></div>').fadeIn(500); 
-//   var action = 'get-page';  
-//   var dataString = {
-//     action: action,
-//     page: page
-//   }; 
-//   axios.post(admin_portal, dataString)
-//   .then(function(response) {
-//     $('#page-content').html(response.data); 
-//   })
-//   .catch(function(error) {
-//     // Handle any errors in the Axios request
-//     $('#page-content').html('<p>Error loading page content. Please try again later.</p>');
-//     console.error("Axios Error: ", error);
-//   });
-// }
 
 
 function Getpages(page, divid) {
@@ -284,34 +269,12 @@ function grades(){
 
 
  
-function image(){
-// Get the image element and the hidden file input
-const imagePreview = document.getElementById('imagePreview');
-const imageInput = document.getElementById('imageInput');
 
-// When the image is clicked, trigger the file input to open the file picker
-imagePreview.addEventListener('click', function() {
-    imageInput.click();  // Simulate a click on the hidden file input
-});
 
-// When the user selects a new image, update the image preview
-imageInput.addEventListener('change', function(event) {
-    const file = event.target.files[0];
 
-    if (file) {
-        const reader = new FileReader();
 
-        // Once the file is read, update the image preview
-        reader.onload = function(e) {
-            imagePreview.src = e.target.result;  // Set the image source to the selected file
-        };
 
-        // Read the selected file as a Data URL (base64)
-        reader.readAsDataURL(file);
-    }
-});
 
-}
 
 function changeButtonText(buttonId) {
   var buttonText = $("#" + buttonId);
@@ -915,4 +878,465 @@ function closeAlert(alertId) {
   setTimeout(function() {
       alertElement.style.display = 'none'; // Hide the alert after fade-out completes
   }, 1000); // Ensure this time matches the fade-out duration (1 second)
+}
+
+
+
+
+
+function fetch_login(student_id) {
+var dataString = 'student_id=' + student_id;
+axios.post(endPoint + '/fetch_student_login?access_key=' + access_key, dataString, {
+    headers: {
+      'apiKey': apiKey
+    }
+  })
+  .then(function(response) {
+    var info = response.data;
+    var success = info.success;
+    var access_check = info.check;
+   
+    if (access_check==0){
+      _logOut();
+    }else{
+
+    if (success == true) {
+      var student_data = info.data;
+      var student_fullname = student_data.fullname;
+      var student_full_id = student_data.student_id;
+      var entry_code = student_data.entry_code;
+      var status_name = student_data.status_name;
+      var faculty_name = student_data.faculty_name;
+      var department_name = student_data.department_name;
+      var entry_year = student_data.entry_year;
+      var level_code = student_data.level_code;
+      var passport = student_data.passport;
+      var ImageUrl = student_data.documentStoragePath +'/'+ passport;
+
+    
+
+      var student_email = student_data.email_address;
+      var student_dob = student_data.dob;
+      var student_mobileno= student_data.mobileno;
+      var student_gender= student_data.gender_name;
+      
+      $(".display-fullname").html(student_fullname);
+      $(".display-student-id").html(student_full_id);
+      $("#display-entry-code").html(entry_code);
+      $("#display-status-name").html(status_name);
+      $(".display-faculty").html(faculty_name);
+      $(".display-department").html(department_name);
+      $("#display-entry-year").html(entry_year);
+      $("#display-level-code").html(level_code);
+      $(".passport").attr('src', ImageUrl);
+  
+
+      $(".display-fullname-input").val(student_fullname);
+      $("#display-email").val(student_email);
+      $("#display-dob").val(student_dob);
+      $("#display-number").val(student_mobileno);
+      $("#display-gender").val(student_gender);
+
+    
+    } else {
+      
+    }}
+  })
+  .catch(function(error) {
+    console.error('Error during fetch:', error);
+  });
+
+}
+
+function _open_menu() {
+  $('.sidenavdiv, .sidenavdiv-in').css('display', 'block');
+  $('#form-container').css('display', 'block');
+}
+
+function _close_menu() {
+  $('.sidenavdiv, .sidenavdiv-in').css('display', 'none');
+  $('#form-container').css('display', 'none');
+}
+
+function toggleMenu() {
+  var isOpen = $('#menu-button').hasClass('open');
+  if (isOpen) {
+    _close_menu();
+    $('#menu-button').removeClass('open');
+  } else {
+    _open_menu();
+    $('#menu-button').addClass('open');
+  }
+}
+
+function hideMenu() {
+  if ($('#menu-button').hasClass('open')) {
+    _close_menu();
+    $('#menu-button').removeClass('open');
+  }
+}
+
+// Hide the form container by default
+// $('#form-container').css('display', 'none');
+
+// $('#menu-button').on('click', toggleMenu);
+
+// $(document).on('click', function(event) {
+//   if (!$(event.target).closest('#menu-button, #form-container').length) {
+//     hideMenu();
+//   }
+// });
+
+
+
+function _open_li(ids){
+  $('#'+ids+'-sub-li').slideToggle('slow');
+}
+
+
+function get_marital() {
+  var text = ''; 
+  axios.post(endPoint + '/marital', {}, { 
+    headers: {
+      'apiKey': apiKey
+    }
+  })
+  .then(function(response) {
+    var fetch = response.data;
+    var success = fetch.success;
+    var message = fetch.message;
+    if (success == true) {
+      for (var i = 0; i < fetch.data.length; i++) { 
+        var marital_status_id = fetch.data[i].marital_status_id;
+        var marital_status_name = fetch.data[i].marital_status_name;
+        text += '<option value="' + marital_status_id + '">' + marital_status_name + '</option>';
+      }
+      $('#marital_status_id').append(text);
+    } else {
+      text = '<option value="">'+message+'</option>'; 
+      $('#marital_status_id').append(text);
+    }
+  })
+}
+
+function get_religion() {
+  var text = ''; 
+  axios.post(endPoint + '/religion', {}, { 
+    headers: {
+      'apiKey': apiKey
+    }
+  })
+  .then(function(response) {
+    var fetch = response.data;
+    var success = fetch.success;
+    var message = fetch.message;
+    if (success == true) {
+      for (var i = 0; i < fetch.data.length; i++) { 
+        var religion_id = fetch.data[i].religion_id;
+        var religion_name = fetch.data[i].religion_name;
+        text += '<option value="' + religion_id + '">' + religion_name + '</option>';
+      }
+      $('#religion_id').append(text);
+    } else {
+      text = '<option value="">'+message+'</option>'; 
+      $('#religion_id').append(text);
+    }
+  })
+}
+
+
+function get_state() {
+  axios.post(endPoint + '/state', {}, { headers: { 'apiKey': apiKey } })
+    .then(function(response) {
+      const { success, message, data } = response.data;
+      if (success) {
+        for (let i = 0; i < data.length; i++) {
+          const state_of_origin_id = data[i].state_of_origin_id;
+          const state_of_origin_name = data[i].state_of_origin_name;
+          $('#state_of_origin_id').append(`<option value="${state_of_origin_id}">${state_of_origin_name}</option>`);
+        }
+        $('#state_of_origin_id').change(function() {
+          const selected_state_of_origin_id = $(this).val();
+          get_local_gov(selected_state_of_origin_id);
+        });
+      } else {
+        $('#state_of_origin_id').html('<option value="">Error: ' + message + '</option>');
+      }
+    })
+    .catch(error => {
+      console.error('get_faculty error:', error);
+      $('#state_of_origin_id').html('<option value="">Error: Failed to load faculties</option>');
+    });
+}
+
+
+function get_local_gov(state_of_origin_id) {
+  $.ajax({
+    type: 'POST',
+    url: endPoint + '/local_gov',
+    data: { state_of_origin_id: state_of_origin_id },
+    headers: {
+      'apiKey': apiKey
+    },
+    success: function(response) {
+      
+      if (response.success) {
+        var departments = response.data;  
+        if (departments.length > 0) {
+          var options = '';
+          departments.forEach(function(local) {
+            options += '<option value="' + local.local_gov_id + '">' + local.local_gov_name + '</option>';
+          });
+        
+          $('#local_gov_id').html(options);
+          $('#local_gov_id').removeAttr('disabled');
+        } else {
+      
+          $('#local_gov_id').html('<option value="">No Localgovernment found</option>');
+        }
+      } else {
+    
+        $('#local_gov_id').html('<option value="">Error: ' + response.message + '</option>');
+      }
+    },
+    error: function(xhr, status, error) {
+
+      $('#local_gov_id').html('<option value="">Error: Failed to load local government</option>');
+    }
+  });
+}
+
+
+
+function validateLetters(input) {
+  const regex = /^[A-Za-z\s]+$/;
+  return regex.test(input); // Return true if input contains only letters, otherwise false
+}
+
+function validatePhoneNumber(phoneNumber) {
+  const cleanedNumber = phoneNumber.replace(/\D/g, ''); 
+  if (cleanedNumber.length < 10 || cleanedNumber.length > 15) {
+    return false; 
+  }
+  const usFormatRegex = /^\d{3}-\d{3}-\d{4}$/; 
+  if (usFormatRegex.test(cleanedNumber)) {
+    return true; 
+  }
+  return true; // If no specific format is required
+}
+
+function preBiodata() {
+  try {
+
+    var state_of_origin_id = document.getElementById("state_of_origin_id").value;
+    var local_gov_id = document.getElementById("local_gov_id").value;
+    var address = $('#address').val();
+    var marital_status_id = document.getElementById("marital_status_id").value;
+    var parent_name = $('#parent_name').val();
+    var parent_mobileno = $('#parent_mobileno').val();
+    var religion_id = document.getElementById("religion_id").value;
+
+    var success = true;
+
+    if (state_of_origin_id == 'select_state') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> STATE ERROR!</br><span>Fill state of origin To Continue</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    }  else if (local_gov_id== 'select_lga') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> LGA ERROR!</br><span>Fill lga To Continue</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    } else if (address== '') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> ADDRESS ERROR!</br><span>Fill address To Continue</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    }else if (marital_status_id== 'select_marital') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> STATUS ERROR!</br><span>Choose status To Continue</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    }else if (parent_name== '') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> GUARDIAN ERROR!</br><span>Fill guardian To Continue</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    }else if (!validateLetters(parent_name)) {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> GUARDIAN ERROR!</br><span>No number allowed</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    }else if (parent_mobileno== '') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> GUARDIAN ERROR!</br><span>Fill guardian mobile To Continue</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    }else if (!validatePhoneNumber(parent_mobileno)) {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> GUARDIAN ERROR!</br><span>Invalid phone number</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    }else if (religion_id== 'select_religion') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> RELIGION ERROR!</br><span>Choose a religion To Continue</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    } else {
+     
+
+      if (success) {
+        _next_page('next_3')
+
+      } else {
+        $('#warning-div').html('<div><i class="bi-exclamation-octagon-fill"></i></div>' + 'ERROR! </br>' + ' ' + message).fadeIn(500).delay(3000).fadeOut(100);
+        $('#prebio_submit_btn').html(btn_text);
+        document.getElementById('submit_btn').disabled = false;
+      }
+    }
+    
+  } catch (error) {
+    console.error(error);
+    $('#warning-div').html('<div><i class="bi-exclamation-octagon-fill"></i></div>' + 'ERROR!' + ' ' + error.message).fadeIn(500).delay(3000).fadeOut(100);
+  }
+}
+
+
+
+
+function updateBio(student_id) {
+  try {
+    const stateOfOriginId = document.getElementById("state_of_origin_id").value;
+    const localGovId = document.getElementById("local_gov_id").value;
+    const address = $('#address').val();
+    const maritalStatusId = document.getElementById("marital_status_id").value;
+    const parentName = $('#parent_name').val();
+    const parentMobileNo = $('#parent_mobileno').val();
+    const religionId = document.getElementById("religion_id").value;
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+   
+    if (selectedImageFile.name ==='friends.png') {
+      $('#warning-div').html('<div><i class="bi-exclamation-octagon-fill"></i></div>' + 'ERROR! </br>' + 'No image selected').fadeIn(500).delay(3000).fadeOut(100);
+      $("#bio_submit_btn").html(btnText);
+      document.getElementById('bio_submit_btn').disabled = false;
+    }else if (!validImageTypes.includes(selectedImageFile.type)) {
+      $('#warning-div').html('<div><i class="bi-exclamation-octagon-fill"></i></div>' + 'ERROR! </br>' + 'Invalid image type').fadeIn(500).delay(3000).fadeOut(100);
+      $("#bio_submit_btn").html(btnText);
+      document.getElementById('bio_submit_btn').disabled = false;
+    }else{
+    if (confirm("Confirm!!\n\n ARE YOU SURE YOU WANT TO SUBMIT ?"))  {
+    const btnText = $("#bio_submit_btn").html();
+    $("#bio_submit_btn").html('<i class="fa fa-spinner fa fa-spin"></i> PROCESSING');
+    document.getElementById("bio_submit_btn").disabled = true;
+  
+
+    const formData = new FormData();
+    formData.append('passport', selectedImageFile);
+    formData.append('state_of_origin_id', stateOfOriginId);
+    formData.append('local_gov_id', localGovId);
+    formData.append('marital_status_id', maritalStatusId);
+    formData.append('address', address);
+    formData.append('parent_name', parentName);
+    formData.append('parent_mobileno', parentMobileNo);
+    formData.append('religion_id', religionId);
+    formData.append('student_id', student_id);
+
+    axios.post(`${endPoint}/biodata?access_key=${access_key}`, formData, {
+      headers: {
+        'apiKey': apiKey
+      }
+    })
+    .then((response) => {
+      const { data } = response;
+      const { success, message } = data;
+
+      if (success) {
+        $('#success-div').html('<div><i class="bi-check-circle-fill"></i></div>' + 'SUCCESS! <br/>' + message).fadeIn(500).delay(5000).fadeOut(100);
+        $('#update-bio').css('display', 'none')
+        $('#print-bio').css('display', 'block')
+        _next_page('next_4');
+        fetch_login(student_id);
+      } else {
+        $('#warning-div').html('<div><i class="bi-exclamation-octagon-fill"></i></div>' + 'ERROR! </br>' + ' ' + message).fadeIn(500).delay(3000).fadeOut(100);
+        $("#bio_submit_btn").html(btnText);
+        document.getElementById('bio_submit_btn').disabled = false;
+      }
+  
+    })
+  
+    .catch((error) => {
+      console.error(error);
+      $('#warning-div').html('<div><i class="bi-exclamation-octagon-fill"></i></div>' + ' ERROR! </br>' + ' ' + error.message).fadeIn(500).delay(3000).fadeOut(100);
+      $("#bio_submit_btn").html(btnText);
+      document.getElementById('bio_submit_btn').disabled = false;
+  });}
+};} catch (error) {
+    console.error(error);
+    $('#warning-div').html('<div><i class="bi-exclamation-octagon-fill"></i></div>' + 'ERROR!' + ' ' + error.message).fadeIn(500).delay(3000).fadeOut(100);
+  }
+}
+
+function image() {
+  const imagePreview = document.getElementById('imagePreview');
+  const imageInput = document.getElementById('imageInput');
+
+  imagePreview.addEventListener('click', function() {
+    imageInput.click();
+  });
+
+  imageInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+
+    if (!window.FileReader) {
+      console.error("FileReader is not supported.");
+    } else if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        imagePreview.src = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+      selectedImageFile = file;
+    
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+function changePass(student_id) {
+  try {
+
+    var current_password = $('#password1').val();
+    var new_password = $('#password2').val();
+    var confirm_new_password = $('#password3').val();
+
+
+    if (current_password == '') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> PASSWORD ERROR!</br><span>Current password is required</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    }  else if (new_password== '') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> PASSWORD ERROR!</br><span>New password is required</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    } else if (confirm_new_password== '') {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> PASSWORD ERROR!</br><span>Confirm password is required</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    }else if (new_password != confirm_new_password) {
+      $('#warning-div').html('<div class="div-in"><div><i class="bi-exclamation-circle"></i></div> <div class="text"> PASSWORD ERROR!</br><span>Password mismatch</span></div></div>').fadeIn(500).delay(3000).fadeOut(100);
+    } else {
+      const btn_text = $("#change_submit_btn").html();
+      $("#change_submit_btn").html('<i class="fa fa-spinner fa fa-spin"></i> PROCESSING');
+      document.getElementById("change_submit_btn").disabled = true;
+
+      var dataString ='student_id=' + student_id + '&password=' + current_password + '&new_password=' + new_password + '&confirm_new_password=' + confirm_new_password;
+      
+
+      axios.post(endPoint + '/change_password', dataString, {
+          headers: {
+            'apiKey': apiKey
+          }
+        })
+        .then(function(response) {
+          var info = response.data;
+          var success = info.success;
+          var message = info.message;
+
+
+      if (success==true) {
+        $('#success-div').html('<div><i class="bi-check-circle-fill"></i></div>' + 'SUCCESS! <br/>' + message).fadeIn(500).delay(5000).fadeOut(100);
+        $("#password1").val(""),$("#password2").val(""),$("#password3").val("");
+        $('#change_submit_btn').html(btn_text);
+        document.getElementById('change_submit_btn').disabled = false;
+
+      } else {
+        $('#warning-div').html('<div><i class="bi-exclamation-octagon-fill"></i></div>' + 'ERROR! </br>' + ' ' + message).fadeIn(500).delay(3000).fadeOut(100);
+        $('#change_submit_btn').html(btn_text);
+        document.getElementById('change_submit_btn').disabled = false;
+      }
+    }
+  )
+  }
+  } catch (error) {
+    console.error(error);
+    $('#warning-div').html('<div><i class="bi-exclamation-octagon-fill"></i></div>' + 'ERROR!' + ' ' + error.message).fadeIn(500).delay(3000).fadeOut(100);
+  }
 }

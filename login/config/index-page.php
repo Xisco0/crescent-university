@@ -7,21 +7,22 @@
 
         <div class="w-[100%] mt-[35px] flex flex-col justify-center items-center gap-[20px]">
 
-            <div class="input-div w-[90%]  my-[30px] border-b-[1px] border-b-[#BEBEBE] relative">
-                <input type="text" id="emailinput" class="input input-div-in" required/>
-                <label for="emailinput" class="label-div absolute top-[50%] left-1 translate-y-[-50%]">Email Address</label>
+            <div class="input-div w-[90%] my-[30px] border-b-[1px] border-b-[#BEBEBE] relative">
+                <input type="text" id="email_address" class="input input-div-in" required/>
+                <label for="email_address" class="label-div absolute top-[50%] left-1 translate-y-[-50%]">Email Address</label>
                 <i class="bi-envelope absolute translate-y-[-50%] top-[50%] right-0"></i>
             </div>
 
             
             <div class="input-div w-[90%] border-b-[1px] border-b-[#BEBEBE] relative">
-                <input type="password" class="input input-div-in" id="validinput" required/>
+                <input type="password" id="password" class="input input-div-in" id="validinput" required/>
                 <label for="validinput" class="label-div absolute top-[50%] left-1 translate-y-[-50%]" >Password</label>
                 <i class="bi-lock absolute translate-y-[-50%] top-[50%] right-0"></i>
             </div>
+
         </div>
         <div class="flex justify-between items-center w-full px-[20px] my-[10px] custom-screen-ml:flex-col">
-            <button class="button" onclick="dashboard()">Login <i class="bi-check"></i></button>
+            <button class="button" onclick="studentLogin()" id="submit_btn">Login <i class="bi-check"></i></button>
             <div>
                 <span class="text-[var(--text-color)] text-[14px]">New Applicant ?</span>
                 <span class="ml-[6px] text-[16px] cursor-pointer" onclick="_next_page('next_3')">Apply Now</span>
@@ -39,7 +40,7 @@
         <div class="w-[100%] mt-[35px] flex flex-col justify-center items-center gap-[20px]">
 
             <div class="input-div w-[90%]  my-[30px] border-b-[1px] border-b-[#BEBEBE] relative">
-                <input type="text" id="email_address" class="input input-div-in" required/>
+                <input type="text" id="reset-email" class="input input-div-in" required/>
                 <label for="email_address" class="label-div absolute top-[50%] left-1 translate-y-[-50%]">Email Address</label>
                 <i class="bi-envelope absolute translate-y-[-50%] top-[50%] right-0"></i>
             </div>
@@ -102,7 +103,7 @@
         <div class="w-[100%] mt-[27px] px-[18px] flex flex-col justify-center items-center gap-[15px]">  
             <div class="w-full">
                 <label for="" class="ml-[10px] mb-[7px]">Date of birth</label>
-                <input type="date" id="dob" class="w-full py-[10px] custom-screen-ml:w-full pl-[15px] outline-none border-[1px] border-[#BEBEBE] rounded-[4px]"/>
+                <input type="date" id="dob" name="dob" class="w-full py-[10px] custom-screen-ml:w-full pl-[15px] outline-none border-[1px] border-[#BEBEBE] rounded-[4px]"/>
             </div>
             <div class="w-full">
                 <label for="" class="ml-[10px] mb-[7px]">Select Faculty</label>
@@ -129,7 +130,7 @@
             </div>
         </div>
         <div class="flex justify-between items-center w-full px-[15px] mt-[28px] custom-screen-ml:flex-col">
-        <button class="button my-[0px] w-[150px] custom-screen-ml:w-full" id="" onclick="signup('finish-signup')"> Proceed <i class="bi-check"></i></button>
+        <button class="button my-[0px] w-[150px] custom-screen-ml:w-full" id="submit" onclick="signup('finish-signup')"> Proceed <i class="bi-check"></i></button>
             <div>   
                 <span>Already have an account ?</span>
                 <span class="cursor-pointer custom-screen-ml:text-[12px] underline" onclick="_next_page('next_1')">Login</span>
@@ -141,7 +142,7 @@
 <?php }?>
 
 <?php if ($page=='reset_password'){?>
-    <div class="w-[calc(100%-600px)] h-[calc(100%-50px)] custom-screen:w-[calc(100%-100px)] bg-[#fff] absolute top-[50%] left-[50%] z-[100] translate-x-[-50%] translate-y-[-50%] rounded-[5px]">
+    <div class="w-[calc(100%-600px)] min-h-[calc(100%-50px)] custom-screen:w-[calc(100%-100px)] bg-[#fff] absolute top-[50%] left-[50%] z-[100] translate-x-[-50%] translate-y-[-50%] rounded-[5px]">
         <div class="w-full py-[12px] px-[15px] bg-gradient-to-r from-[var(--school-color)] to-[#075720] rounded-tl-[inherit] rounded-tr-[inherit] flex items-center justify-between">
             <div>
             <i class="bi-lock-fill text-[#fff]"></i>
@@ -183,40 +184,40 @@
             <div class="w-[30px] h-[30px] text-[#fff] text-[15px] rounded-[50%] cursor-pointer bg-[#FF0000] hover:bg-[#f13d3d] transition duration-[0.5s] ease-in-out flex justify-center items-center" onclick="_close()"><i class="bi-x"></i></div>
         </div>
         <div class=" w-[calc(100%-40px)] px-[20px] mt-[20px] flex mx-auto flex-col justify-center">
-            <div class="message text-[14px] py-[10px] px-[15px] font-[body-font] custom-screen-ml:text-[12px]"><i class="bi-person-fill"></i> Dear <span >Bamirin Francis</span>, An <span>OTP</span> has been sent
-            to your email address (<span>francis6@gmail.com</span>) to confirm your email address. Kindly check your <b>INBOX</b> or <b>SPAM</b> to confirm. </div>
-        
+            <div class="message text-[14px] py-[10px] px-[15px] font-[body-font] custom-screen-ml:text-[12px]"><i class="bi-person-fill"></i> Dear <span id="veri_fullname">xxx</span>, An <span>OTP</span> has been sent
+            to your email address (<span id="veri_email">xxx</span>) to confirm your email address. Kindly check your <b>INBOX</b> or <b>SPAM</b> to confirm. </div>
+            
             <label class="mt-[18px] ml-[10px] text-[var(--secondary-color)] font-[sub-title-font] custom-screen-ml:text-[14px]">ENTER OTP:</label>
-            <input type="text" placeholder="ENTER OTP" class="w-full outline-none mt-[5px] py-[10px] border-[#BEBEBE] border-[1px] rounded-[7px] pl-[10px]">
-
-            <div class="w-full py-[15px] pl-[15px] rounded-[3px] mt-[15px] bg-[#FCEDEA] custom-screen-ml:text-[11px]"><span class="text-[#0b471e] ">OTP</span> not received? <span class="text-[#0b471e] cursor-pointer"><i class="bi-send"></i> RESEND OTP </span></div>
-
-            <button class="button w-full mt-[17px]" onclick="Getpass('Registration-success')"><i class="bi-check"></i> Submit</button>
+            <input type="text"id="otp" placeholder="ENTER OTP" class="w-full outline-none mt-[5px] py-[10px] border-[#BEBEBE] border-[1px] rounded-[7px] pl-[10px]">
+          
+            <div class="w-full py-[15px] pl-[15px] rounded-[3px] mt-[15px] bg-[#FCEDEA] custom-screen-ml:text-[11px]"><span class="text-[#0b471e] ">OTP</span> not received? <span class="text-[#0b471e] cursor-pointer hidden" id="resendOtp" onclick="_resend_otp()"><i class="bi-send"></i> RESEND OTP </span><span class="text-[#0b471e] cursor-pointer" id="timer">5:00</span></div>
+            <script>initializeCountdownTime('timer', 'resendOtp');</script>
+            <button class="button w-full mt-[17px]" id="submit_email" onclick="completeSignup('registration-success')"><i class="bi-check"></i> Submit</button>
         </div>
     </div>
 
 <?php }?>
 
-<?php if ($page=='Registration-success'){?>
-    <div class="w-full h-full flex justify-center items-center">
+<?php if ($page=='registration-success'){?>
+    <div class="w-full h-full flex justify-center items-center log-div">
         <div class="rounded-[5px] bg-[var(--main-color)] w-[350px] min-h-[250px] flex flex-col justify-center items-center gap-[10px]">
             <div class="w-[180px]">
                 <img src="src/all-images/images/success.gif" class="w-full overflow-hidden" alt="success">
             </div>
             <span class="font-[body-font] text-[18px]">Registration successful</span>
-            <button class="button w-[190px]" onclick="window.location.reload()">Login</button>
+            <button class="button w-[190px]" onclick="_next_page('next_1')">Login</button>
         </div>
     </div>
 <?php }?>
 
 <?php if ($page=='finish_reset_password'){?>
-    <div class="w-full h-full flex justify-center items-center">
+    <div class="w-full h-full flex justify-center items-center log-div">
         <div class="rounded-[5px] bg-[var(--main-color)] w-[350px] min-h-[250px] flex flex-col justify-center items-center gap-[10px]">
             <div class="w-[180px]">
                 <img src="src/all-images/images/success.gif" class="w-full overflow-hidden" alt="success">
             </div>
             <span class="font-[body-font] text-[18px]">Password Reset successful</span>
-            <button class="button w-[190px]" onclick="window.location.reload()">Login</button>
+            <button class="button w-[190px]" onclick="_next_page('next_1')">Login</button>
         </div>
     </div>
 <?php }?>

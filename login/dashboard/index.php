@@ -8,21 +8,23 @@
 <body>
    <?php include 'src/preloader.php' ?>
     <div class="overlay"></div>
-   
+    <?php include '../../public/styles/alert.php' ?>
    <?php include 'header.php' ?>
-    <div class="absolute z-[-600] w-full h-full ">
+    <div class="absolute z-[-600] w-full h-full pt-[40px]">
         
-        <div class="w-full h-full pt-[60px] flex items-center gap-[20px]">
-            <?php include "sidebar.php" ?>
-            <div class="w-[calc(100%-280px)]">
-                <div class=" w-[100%]" id="page_title"><h2 class="font-normal font-[body-font] text-[18px]"><i class="bi-speedometer2"></i> Student Dashboard Overview </h2> </div>
+        
+        <?php include "sidebar.php" ?>
+        <?php include "open-side.php" ?>
+        <div class="w-[calc(100%-300px)] custom-screen-dh:left-1/2 custom-screen-dh:-translate-x-1/2 custom-screen-dh:w-[calc(100%-50px)] absolute z-[-1] right-0 top-[10%] overflow-auto">
+            <div class=" w-[100%]" id="page_title"><h2 class="font-normal font-[body-font] text-[18px]"><i class="bi-speedometer2"></i> Student Dashboard Overview </h2> </div>
 
-                <div id="page-content" class="h-full ">
-                    <script>Getpages('dashboard')</script>
-                </div>
+            <div id="page-content" class="h-full">
+                <script>Getpages('change-password')</script>
             </div>
         </div>
+       
     </div>
+
    <?php include "../../public/config/bottom-scripts.php" ?>
 </body>
 </html>

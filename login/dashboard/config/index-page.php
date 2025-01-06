@@ -1,7 +1,7 @@
 <?php if ($page=='dashboard'){?>
-    <div class="w-full h-full">
+    <div class="w-full h-full max-w-[1200px] custom-screen-dh:py-[10px] flex flex-col custom-screen-dh:flex-col-reverse">
         
-        <div class="flex items-center justify-around gap-3">
+        <div class="flex items-center justify-around gap-3  custom-screen-dh:flex-wrap">
             <div class="totals" style="box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3)">
                 <h3 class="text-[#fff] text-[18px] mb-[10px] font-[body-font] m-0 p-0">Total Bill</h3>
                 <span class="text-[var(--schools-color)] counter" data-target="689000">N 0</span>
@@ -25,59 +25,60 @@
             </div>
         </div>
 
-        <div class="w-[calc(100%-15px)] px-[15px] rounded-[5px] mx-auto h-[calc(100%-100px)] mt-[10px] border-[1px] border-[#BEBEBE]">
+        <div class="w-[calc(100%-15px)] px-[15px] rounded-[5px] mx-auto min-h-[calc(100%-50px)] custom-screen-d:h-full mt-[10px] border-[1px] border-[#BEBEBE]">
             <div class="flex justify-between w-full">
                 <div class="flex items-center gap-[20px] mt-[10px]">
-                    <img src="all-images/background/friends.png" alt="image" class="overflow-hidden rounded-[60%]  w-[60px] h-[60px] cursor-pointer ml-[15px]">
+                    <img alt="image" class="passport overflow-hidden rounded-[60%]  w-[60px] h-[60px] cursor-pointer ml-[15px]">
                     <div>
-                        <h3>BAMIRIN FRANCIS OLAWALE</h3>
-                        <span class="text-[#979797] font-[sub-title-font]">MATRIC NO: <span clas="font-[body-font]">2463987356</span> </span>
+                        <h3 class="display-fullname">xxx</h3>
+                        <span class="text-[#979797] font-[sub-title-font]">STUDENT NO: <span class="font-[body-font] text-[13px] display-student-id" >xxx</span> </span>
                     </div>
                 </div>
 
-                <button class="button py-[10px]"><i class="bi-person"></i> EDIT PROFILE</button>
+                <button class="w-[130px] custom-screen-d:hidden bg-gradient-to-r from-[#10923A] to-[#075720] transition duration-[0.5s] text-[#fff] my-[20px] rounded-[5px] text-[body-font] py-[10px]"><i class="bi-person"></i> EDIT PROFILE</button>
             </div>
-            <table class="w-[100%] mt-[10px] mx-auto table-auto border-collapse border  border-gray-300">
+            <table class="w-full mt-[10px] mx-auto table-auto border-collapse border border-gray-300 overflow-x-auto">
+
                 <tr class="bg-gray-100">
-                <th class="th">Matric no</th>
-                <td class="td">2463987356</td>
+                <th class="th">Student no</th>
+                <td class="td display-student-id">xxx</td>
                 </tr>
 
                 <tr class="hover:bg-gray-50">
                 <th class="th">Fullname</th>
-                <td class="td">Bamirin Francis</td>
+                <td class="td display-fullname">xxx</td>
                 </tr>
 
                 <tr class="bg-gray-100">
                 <th class="th">Faculty</th>
-                <td class="td">Science</td>
+                <td class="td display-faculty">xxx</td>
                 </tr>
 
                 <tr class="hover:bg-gray-50">
                 <th class="th">Department</th>
-                <td class="td">Computer science</td>
+                <td class="td display-department">xxx</td>
                 </tr>
 
                 <tr class="bg-gray-100">
                 <th class="th">Level</th>
-                <td class="td">100 level</td>
+                <td class="td"><span id="display-level-code">xxx</span> level</td>
 
-                <th class="th">Status</th>
-                <td class="td"><span class="bg-[#00A65A] font-[body-font] text-[12px] rounded-[5px] py-[3px] px-[7px] text-[#fff]">Active</span></td>
+                <th class="th custom-screen-1:hidden">Status</th>
+                <td class="td custom-screen-1:hidden"><span class="bg-[#00A65A] font-[body-font] text-[12px] rounded-[5px] py-[3px] px-[7px] text-[#fff]" id="display-status-name">xxx</span></td>
                 </tr>
 
                 <tr class="hover:bg-gray-50">
                 <th class="th">Session</th>
                 <td class="td">2024/2025</td>
-                <td class="td border-r-0 border-r-[transparent]">FIRST SEMESTER</td>
+                <td class="td border-r-0 border-r-[transparent] custom-screen-1:hidden">FIRST SEMESTER</td>
                 </tr>
 
                 <tr class="bg-gray-100">
                 <th class="th">ENTRY MODE</th>
-                <td class="td">UTME</td>
+                <td class="td" id="display-entry-code">xxx</td>
 
-                <th class="th">ENTRY YEAR</th>
-                <td class="td">2024</td>
+                <th class="th custom-screen-1:hidden">ENTRY YEAR</th>
+                <td class="td custom-screen-1:hidden" id="display-entry-year">xxx</td>
                 </tr>
             
             </table>
@@ -311,7 +312,7 @@
                     <i class="cursor-pointer bi-eye-slash" id="toggler3" onclick="_password('password3','toggler3')"></i>
                 </div>
             </div>
-            <button class="button float-right mt-[30px] hover:bg-gradient-to-r from-[#15a242] to-[#0c6e2b]"><i class="bi-check"></i> Update</button>
+            <button class="button w-[150px] float-right mt-[30px] hover:bg-gradient-to-r from-[#15a242] to-[#0c6e2b]" id="change_submit_btn" onclick="changePass(student_id)"><i class="bi-check"></i> Update</button>
         </div>
     </div>
 <?php }?>
@@ -369,17 +370,17 @@
                         <h2></h2>
                         <p><strong>Through:</strong></p>
                         <p>The Level Adviser,</p>
-                        <p>100 LEVEL COMPUTER SCIENCE,</p>
+                        <p>100 LEVEL <span>Your Department</span>,</p>
                         <p>CRESCENT UNIVERSITY.</p>
                         <p><br></p>
                         <p><strong>Through:</strong></p>
                         <p>The Head of Department,</p>
-                        <p>COMPUTER SCIENCE,</p>
+                        <p>Your Department</p>,
                         <p>CRESCENT UNIVERSITY.</p>
                         <p><br></p>
                         <p><strong>Through:</strong></p>
                         <p>The Dean,</p>
-                        <p>Faculty of science,</p>
+                        <p>Your faculty</p>,
                         <p>CRESCENT UNIVERSITY.</p>
                         <p><br></p>
                         <p><strong>To:</strong></p>
@@ -393,7 +394,7 @@
                         
                         <p>Thanks!</p>
                         <p>your's faithfully,</p>
-                        <p>BAMIRIN FRANCIS</p>
+                        <p>Your fullname</p>
                         <p></p>
                 
                     </div>
@@ -406,3 +407,5 @@
         
     </div>
 <?php }?>
+
+<script>fetch_login(student_id)</script>

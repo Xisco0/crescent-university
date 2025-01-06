@@ -22,13 +22,13 @@
         @apply cursor-pointer text-[13px] font-[body-font] transition duration-500 ease-out relative
     }
     .totals{
-        @apply cursor-pointer w-[250px] mt-[20px] px-[20px] py-[20px] rounded-[5px] h-[140px] bg-[#00A65A] relative transition duration-[0.5s] ease-out hover:transform hover:-translate-y-2 hover:bg-[#008d4c]
+        @apply cursor-pointer w-[250px] custom-screen-dh:w-full  mt-[20px] px-[20px] py-[20px] rounded-[5px] h-[140px] bg-[#00A65A] relative transition duration-[0.5s] ease-out hover:transform hover:-translate-y-2 hover:bg-[#008d4c]
     }
     .th{
         @apply px-4 py-2 text-left text-[#000] font-semibold font-[body-font] text-sm border-[1px] border-gray-300
     }
     .td{
-        @apply px-4 py-2 text-sm text-gray-700 border-[1px] border-gray-300
+        @apply px-4 py-2 text-[11px] text-gray-700 border-[1px] border-gray-300
     }
     .bio-input{
         @apply bg-[#F9F9F9] w-[100%] rounded-[5px] p-[15px] my-[5px] outline-none text-[#959595]
