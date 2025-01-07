@@ -1,4 +1,4 @@
-<?php include '../public/config/static.php'?>
+<?php include '../public2/config/static.php'?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"  Lang="en">
 <head>
@@ -7,7 +7,7 @@
 </head>
 <body>
    <?php include 'src/preloader.php' ?>
-   <?php include '../public/styles/alert.php' ?>
+   <?php include '../public2/styles/alert.php' ?>
     <div class="overlay log-div"></div>
     <div class="upperlay flex justify-center items-center">
         <div class="w-[85%] min-h-[500px] rounded-[5px] m-auto max-w-[1200px] flex items-center custom-screen:flex-col custom-screen:min-h-[500px] custom-screen:justify-center">
