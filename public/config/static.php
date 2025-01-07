@@ -8,7 +8,7 @@
     $ip_address=$_SERVER['REMOTE_ADDR']; //ip used
     $sysname=gethostname();//computer used
     /////////////////////////////////////////////////////////////////
-    $website_url='http://localhost/crescent_university.com';
+    $website_url='http://localhost/crescent-university';
     // $website_url='https://207d-102-89-47-118.ngrok-free.app/crescent_university.com';
     $latest_version= date('Ymdhis');
 ?>
@@ -16,7 +16,7 @@
 
 
 <script>
-var website_url='http://localhost/crescent_university.com';
+var website_url='http://localhost/crescent-university';
 // var website_url='https://207d-102-89-47-118.ngrok-free.app/crescent_university.com'
 var admin_portal_dashboard = website_url+'/login/config/code';
 var admin_portal = website_url+'/login/dashboard/config/code';
