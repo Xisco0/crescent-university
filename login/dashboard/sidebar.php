@@ -19,7 +19,7 @@
                     <li onclick="Getpages('update-bio', 'update-bio')" id="update-bio" class="cursor-pointer active-li">Update Biodata
                     <div class="hidden" id="_update-bio"><i class="bi-person"></i> Update Biodata</div>
                     </li>
-                    <li class="mt-[10px] cursor-pointer hidden" id="print-bio" onclick="printBiodata()">Print Biodata</li>
+                    <li class="mt-[10px] cursor-pointer" id="download-pdf" onclick="printBiodata()">Print Biodata</li>
                     <li class="my-[10px] cursor-pointer" onclick="Getpages('transfer', 'transfer')" id="transfer">Transfer
                         <div class="hidden text-[17px] font-semibold" id="_transfer"><i class="bi-arrow-up-right-square-fill"></i> Transfer</div>
                     </li>

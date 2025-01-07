@@ -591,7 +591,7 @@ video {
 .button {
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 130px;
+  min-width: 130px;
   border-radius: 5px;
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
   --tw-gradient-from: #10923A var(--tw-gradient-from-position);
@@ -1369,10 +1369,6 @@ video {
   width: 100vw;
 }
 
-.w-\[\] {
-  width: ;
-}
-
 .max-w-\[1200px\] {
   max-width: 1200px;
 }
@@ -1653,6 +1649,15 @@ video {
   background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[\] {
+  background-color: ;
+}
+
+.bg-\[blue\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 255 / var(--tw-bg-opacity, 1));
+}
+
 .bg-\[linear-gradient\(45deg\2c _\#fff_0\%\2c _\#fff_60\%\2c _\#075720_60\%\2c _\#10b981_100\%\)\] {
   background-image: linear-gradient(45deg, #fff 0%, #fff 60%, #075720 60%, #10b981 100%);
 }
@@ -1695,11 +1700,6 @@ video {
 
 .to-\[\#57a871\] {
   --tw-gradient-to: #57a871 var(--tw-gradient-to-position);
-}
-
-.object-contain {
-  -o-object-fit: contain;
-     object-fit: contain;
 }
 
 .object-cover {
@@ -1988,6 +1988,20 @@ video {
 
 .text-\[var\(--text-color\)\] {
   color: var(--text-color);
+}
+
+.text-\[\] {
+  color: ;
+}
+
+.text-\[red\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 0 0 / var(--tw-text-opacity, 1));
+}
+
+.text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity, 1));
 }
 
 .underline {

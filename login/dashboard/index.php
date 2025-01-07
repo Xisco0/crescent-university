@@ -7,6 +7,7 @@
 </head>
 <body>
    <?php include 'src/preloader.php' ?>
+   
     <div class="overlay"></div>
     <?php include '../../public/styles/alert.php' ?>
    <?php include 'header.php' ?>

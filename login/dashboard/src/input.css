@@ -4,7 +4,7 @@
 
 @layer components {
     .button {
-        @apply w-[130px] bg-gradient-to-r from-[#10923A] to-[#075720] transition duration-[0.5s] text-[#fff] my-[20px] py-[15px] rounded-[5px] text-[body-font] custom-screen-ml:w-full;
+        @apply min-w-[130px] bg-gradient-to-r from-[#10923A] to-[#075720] transition duration-[0.5s] text-[#fff] my-[20px] py-[15px] rounded-[5px] text-[body-font] custom-screen-ml:w-full;
     }
     .button2 {
         @apply w-full text-left pl-[13px] bg-gradient-to-r from-[#104621] to-[#104621] transition duration-[0.5s] text-[#fff] py-[15px] border-b-[1px] border-b-[#000] text-[body-font];

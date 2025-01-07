@@ -293,35 +293,30 @@ function changeButtonText(buttonId) {
 }
 
 
-function generateBiodata() {
-  var fullName = document.getElementById('fullName').value;
-  var dob = document.getElementById('dob').value;
-  var course = document.getElementById('course').value;
-  var email = document.getElementById('email').value;
-  var address = document.getElementById('address').value;
 
-  // Create biodata output
-  var biodataHTML = `
-      <p><strong>Full Name:</strong> ${fullName}</p>
-      <p><strong>Date of Birth:</strong> ${dob}</p>
-      <p><strong>Course:</strong> ${course}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Address:</strong><br>${address}</p>
-  `;
+// function printBiodata() {
+//   document.getElementById('download-pdf').addEventListener('click', function () {
+//     // Fetch the content from the server (PHP session)
+//     fetch('get_content.php')
+//         .then(response => response.json())
+//         .then(data => {
+//             const { jsPDF } = window.jspdf;
+//             const doc = new jsPDF();
 
-  // Show the biodata
-  document.getElementById('biodataDetails').innerHTML = biodataHTML;
-  document.getElementById('biodataOutput').style.display = 'block';
-}
+//             // Generate PDF from content
+//             doc.html(data.content, {
+//                 callback: function (doc) {
+//                     doc.save('generated_content.pdf');
+//                 },
+//                 x: 10,
+//                 y: 10,
+//             });
+//         })
+//         .catch(error => alert('Error fetching content: ' + error));
+// });
+// }
 
-function printBiodata() {
-  var printWindow = window.open('', '', 'height=600,width=800');
-  printWindow.document.write('<html><head><title>Print Biodata</title></head><body>');
-  printWindow.document.write(document.getElementById('biodataOutput').innerHTML);
-  printWindow.document.write('</body></html>');
-  printWindow.document.close();
-  printWindow.print();
-}
+
 
 function _password(inputId, togglerId) {
   var password = document.getElementById(inputId);

@@ -22,7 +22,9 @@
 <script src="<?php echo $website_url?>/login/dashboard/js/session_validation.js"></script>
 <script src="<?php echo $website_url?>/public/js/aos.js"></script>
 <script src="<?php echo $website_url?>/public/js/superplaceholder.js"></script>
-<script src="<?php echo $website_url?>/public/js/jspdf.min.js_1.5.3/cdnjs/jspdf.min.js"></script>
+<script src="<?php echo $website_url?>/public/js/jspdf/dist/jspdf.umd.min.js" type="text/javascript"></script>
 <script src="<?php echo $website_url?>/login/dashboard/src/js/jquery.backstretch.min.js" type="text/javascript"></script>
 <script src="<?php echo $website_url?>/node_modules/axios/dist/axios.min.js" type="text/javascript"></script>
 <script src="<?php echo $website_url?>/node_modules/quill/dist/quill.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+

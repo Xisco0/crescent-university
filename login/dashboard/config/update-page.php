@@ -89,12 +89,16 @@
     <fieldset class="fieldset hidden log-div mb-[330px]" id="next_3">
         <legend class="font-semibold px-[10px] font-[sub-title-font]">Update Passport</legend>
         <div class="w-[130px] h-[130px] ml-[10px] cursor-pointer">
+            
             <img id="imagePreview" class="passport w-full h-full" alt="image">
             <input type="file" id="imageInput" class="hidden overflow-hidden object-cover" accept="image/*">
             <script>image()</script>
+            
+       
+            
         </div>
       
-        <buttton class="button cursor-pointer absolute bottom-[-5%] right-[2%] mt-[20px] ml-[15px]  py-[15px] px-[15px]" onclick="updateBio(student_id)" id="bio_submit_btn"><i class="bi-check"></i> SUBMIT</buttton>
+        <buttton class="button w-[150px] text-center cursor-pointer absolute bottom-[-5%] right-[2%] mt-[20px] ml-[15px]  py-[15px] px-[15px]" onclick="updateBio(student_id)" id="bio_submit_btn"><i class="bi-check"></i> SUBMIT</buttton>
     </fieldset>
 
     <fieldset class="fieldset log-div hidden mb-[330px] py-[40px]" id="next_4">
